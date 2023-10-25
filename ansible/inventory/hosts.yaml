@@ -6,8 +6,6 @@ kubernetes:
         vermilion:
           ansible_user: root
           ansible_host: 192.168.1.99
-    worker:
-      hosts:
         cinnabar:
           ansible_user: root
           ansible_host: 192.168.1.65
