@@ -1,0 +1,16 @@
+---
+kubernetes:
+  children:
+    master:
+      hosts:
+        vermilion:
+          ansible_user: root
+          ansible_host: 192.168.1.99
+    worker:
+      hosts:
+        cinnabar:
+          ansible_user: root
+          ansible_host: 192.168.1.65
+        cerulean:
+          ansible_user: root
+          ansible_host: 192.168.1.186
