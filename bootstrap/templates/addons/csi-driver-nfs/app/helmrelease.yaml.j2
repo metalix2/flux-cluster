@@ -5,6 +5,8 @@ metadata:
   name: csi-driver-nfs
   namespace: kube-system
 spec:
+  dependsOn:
+    - name: cluster-apps-nfs
   interval: 30m
   chart:
     spec:
