@@ -12,5 +12,5 @@ data:
   SERVICE_CIDR: "10.43.0.0/16"
   NODE_CIDR: "192.168.1.0/24"
   NFS_CLUSTERIP: "192.168.1.13"
-  NFS_DIR: "/disk"
+  NFS_DIR: "/exports"
   STORAGE_HOSTNAME: "cerulean"
