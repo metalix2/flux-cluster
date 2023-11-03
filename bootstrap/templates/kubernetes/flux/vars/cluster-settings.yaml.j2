@@ -16,3 +16,6 @@ data:
   CLUSTER_CIDR_V6: "{{ bootstrap_cluster_cidr.split(',')[1] }}"
   SERVICE_CIDR_V6: "{{ bootstrap_service_cidr.split(',')[1] }}"
   {% endif %}
+  NFS_CLUSTERIP: "{{ bootstrap_storage_node_ip[1:] }}"
+  NFS_DIR: "{{ bootstrap_storage_node_dir }}"
+  STORAGE_HOSTNAME: "{{ bootstrap_storage_node_name[1:] }}"
