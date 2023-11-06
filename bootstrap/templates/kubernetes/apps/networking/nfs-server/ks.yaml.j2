@@ -2,10 +2,10 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: cluster-apps-nfs
+  name: cluster-apps-nfs-server
   namespace: flux-system
 spec:
-  path: ./kubernetes/apps/networking/nfs/app
+  path: ./kubernetes/apps/networking/nfs-server/app
   prune: true
   sourceRef:
     kind: GitRepository
