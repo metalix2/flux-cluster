@@ -30,7 +30,7 @@ spec:
     - name: nfs-server
       namespace: networking
 
-    values:
+  values:
     controllers:
       main:
         type: statefulset
