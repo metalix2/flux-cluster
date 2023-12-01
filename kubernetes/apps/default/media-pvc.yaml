@@ -1,0 +1,40 @@
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-csi-media
+spec:
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-csi
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    - noatime
+    - rsize=131072
+    - wsize=131072
+  csi:
+    driver: nfs.csi.k8s.io
+    readOnly: false
+    # volumeHandle format: {nfs-server-address}#{sub-dir-name}#{share-name} fixed ip = 10.43.0.20
+    volumeHandle: nfs-server.networking.svc.cluster.local/#exports
+    volumeAttributes:
+      server: nfs-server.networking.svc.cluster.local
+      share: /exports
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media
+  namespace: default
+spec:
+  accessModes: ["ReadWriteMany"]
+  storageClassName: nfs-csi
+  resources:
+    requests:
+      storage: 1Mi # Size does not matter
