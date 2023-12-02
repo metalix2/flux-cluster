@@ -52,10 +52,17 @@ spec:
         clusterIP: "${NFS_ADDR}"
         ports:
           nfs:
+            enabled: true
+            primary: true
+            protocol: TCP
             port: 2049
           rpcbind:
+            enabled: true
+            protocol: TCP
             port: 111
           mountd:
+            enabled: true
+            protocol: TCP
             port: 20048
     persistence:
       data:
