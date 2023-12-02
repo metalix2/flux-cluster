@@ -21,9 +21,9 @@ spec:
     driver: nfs.csi.k8s.io
     readOnly: false
     # volumeHandle format: {nfs-server-address}#{sub-dir-name}#{share-name} fixed ip = 10.43.0.20
-    volumeHandle: nfs-server.networking.svc.cluster.local/#exports
+    volumeHandle: 10.43.0.20/#exports
     volumeAttributes:
-      server: nfs-server.networking.svc.cluster.local
+      server: 10.43.0.20
       share: /exports
 
 ---
