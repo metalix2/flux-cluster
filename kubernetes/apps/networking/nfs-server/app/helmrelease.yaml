@@ -51,9 +51,11 @@ spec:
         # https://github.com/kubernetes/examples/issues/390
         clusterIP: "${NFS_ADDR}"
         ports:
-          http:
+          nfs:
             port: 2049
+          rpcbind:
             port: 111
+          mountd:
             port: 20048
     persistence:
       data:
