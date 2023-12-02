@@ -73,7 +73,7 @@ spec:
           volumeClaimTemplates:
             - name: config
               accessMode: ReadWriteOnce
-              storageClass: local-path
+              storageClassName: local-path
               globalMounts:
                 - path: /config
     service:
