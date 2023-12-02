@@ -25,8 +25,6 @@ spec:
   uninstall:
     keepHistory: false
   dependsOn:
-    # - name: intel-device-plugin-gpu
-    #   namespace: kube-system
     - name: nfs-server
       namespace: networking
 
@@ -43,55 +41,20 @@ spec:
               tag: 1.32.7.7621-871adbd44@sha256:f9f77dc5e17cab9fae5ece663a64d026e3c75142b3b60bb4a52bf061957412be
             env:
               TZ: Europe/London
-            # resources:
-            #   requests:
-            #     gpu.intel.com/i915: 1
-            #     cpu: 100m
-            #     memory: 2Gi
-            #   limits:
-            #     gpu.intel.com/i915: 1
-            #     memory: 5Gi
-        pod:
-          affinity:
-            podAntiAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                - labelSelector:
-                    matchExpressions:
-                      - key: app.kubernetes.io/name
-                        operator: In
-                        values: ["frigate"]
-                  topologyKey: kubernetes.io/hostname
-          nodeSelector:
-            intel.feature.node.kubernetes.io/gpu: "true"
-          securityContext:
-            runAsUser: 568
-            runAsGroup: 568
-            fsGroup: 568
-            fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [44, 105, 10000]
-        statefulset:
-          volumeClaimTemplates:
-            - name: config
-              accessMode: ReadWriteOnce
-              storageClassName: local-path
-              globalMounts:
-                - path: /config
     service:
       main:
         type: LoadBalancer
         annotations:
-          io.cilium/lb-ipam-ips: "{{ bootstrap_external_ingress_addr }}"
+          io.cilium/lb-ipam-ips: "{{ bootstrap_internal_ingress_addr }}"
         ports:
           http:
             port: 32400
     ingress:
       main:
         enabled: true
-        className: external
+        className: internal
         annotations:
-          external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
-          nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-          hajimari.io/icon: plex
+          hajimari.io/icon: "plex"
         hosts:
           - host: &host "plex.${SECRET_DOMAIN}"
             paths:
