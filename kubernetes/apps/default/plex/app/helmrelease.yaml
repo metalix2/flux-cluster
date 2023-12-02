@@ -94,7 +94,7 @@ spec:
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
           hajimari.io/icon: plex
         hosts:
-          - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
+          - host: &host "plex.${SECRET_DOMAIN}"
             paths:
               - path: /
                 service:
