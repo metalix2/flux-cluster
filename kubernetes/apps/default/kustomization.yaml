@@ -7,3 +7,4 @@ resources:
   - ./media-pvc.yaml
   # Flux-Kustomizations
   - ./hajimari/ks.yaml
+  - ./plex/ks.yaml
