@@ -53,6 +53,8 @@ spec:
         ports:
           http:
             port: 2049
+            port: 111
+            port: 20048
     persistence:
       data:
         enabled: true
