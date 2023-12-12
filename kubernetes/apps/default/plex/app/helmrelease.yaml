@@ -27,6 +27,8 @@ spec:
   dependsOn:
     - name: nfs-server
       namespace: networking
+    - name: intel-device-plugin-gpu
+      namespace: kube-system
 
   values:
     controllers:
