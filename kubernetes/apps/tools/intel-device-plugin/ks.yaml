@@ -2,41 +2,40 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app node-feature-discovery
+  name: &app intel-device-plugin
   namespace: flux-system
 spec:
-  targetNamespace: kube-system
+  targetNamespace: tools
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/kube-system/node-feature-discovery/app
+  path: ./kubernetes/apps/tools/intel-device-plugin/app
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: true
+  wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m
+
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app node-feature-discovery-rules
+  name: &app intel-device-plugin-gpu
   namespace: flux-system
 spec:
-  targetNamespace: kube-system
+  targetNamespace: tools
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  dependsOn:
-    - name: node-feature-discovery
-  path: ./kubernetes/apps/kube-system/node-feature-discovery/rules
+  path: ./kubernetes/apps/tools/intel-device-plugin/gpu
   prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  wait: true
+  wait: false
   interval: 30m
   retryInterval: 1m
   timeout: 5m
