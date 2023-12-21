@@ -25,10 +25,10 @@ spec:
   uninstall:
     keepHistory: false
   dependsOn:
-    - name: intel-device-plugin-gpu
-      namespace: tools
     - name: nfs-server
       namespace: networking
+    - name: intel-device-plugin-gpu
+      namespace: kube-system
 
   values:
     controllers:
@@ -43,7 +43,7 @@ spec:
               tag: 1.32.8.7639-fb6452ebf@sha256:637fe10cef736f249d96cb004c12f81646c81ca17ddce22374ea8782aa6646c2
             env:
               TZ: Europe/London
-              PLEX_CLAIM: "{{ plex_claim }}"
+              PLEX_CLAIM: claim-x7yts4ZtjyWWKT-SWLxA
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true

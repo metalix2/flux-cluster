@@ -3,12 +3,12 @@ kubernetes:
   children:
     master:
       hosts:
-        vermilion:
-          ansible_user: root
-          ansible_host: 192.168.1.11
-        cinnabar:
-          ansible_user: root
-          ansible_host: 192.168.1.12
+        # vermilion:
+        #   ansible_user: root
+        #   ansible_host: 192.168.1.11
+        # cinnabar:
+        #   ansible_user: root
+        #   ansible_host: 192.168.1.12
         cerulean:
           ansible_user: root
           ansible_host: 192.168.1.13

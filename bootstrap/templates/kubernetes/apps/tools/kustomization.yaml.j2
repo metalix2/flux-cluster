@@ -1,0 +1,12 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./namespace.yaml
+  {% if intel_device_plugin.enabled | default(false) %}
+  - ./intel_device_plugin/ks.yaml
+  {% endif %}
+  {% if node_feature_discovery.enabled | default(false) %}
+  - ./node_feature_discovery/ks.yaml
+  {% endif %}
+  - ./reloader/ks.yaml
