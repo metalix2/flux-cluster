@@ -9,7 +9,7 @@ provisioner: nfs.csi.k8s.io
 parameters:
   server: {{ item.server }}
   share: {{ item.share }}
-reclaimPolicy: Delete
+reclaimPolicy: {{ item.reclaimPolicy }}
 volumeBindingMode: Immediate
 mountOptions: ["hard", "noatime"]
 {% endfor %}

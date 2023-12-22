@@ -18,4 +18,5 @@ data:
   {% endif %}
   NFS_ADDR: "{{ bootstrap_service_cidr.split(',')[0] | ansible.utils.nthhost(20) }}"
   NFS_DIR: "{{ bootstrap_storage_node_dir }}"
-  STORAGE_HOSTNAME: "{{ bootstrap_storage_node_name[1:] }}"
+  STORAGE_HOSTNAME: "{{ bootstrap_storage_node_name }}"
+  PLEX_CLAIM: "{{ plex.claim }}"

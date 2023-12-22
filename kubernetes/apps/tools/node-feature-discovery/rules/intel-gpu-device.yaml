@@ -12,4 +12,4 @@ spec:
       matchFeatures:
         - feature: pci.device
           matchExpressions:
-            vendor: { op: In, value: ["8086", "5912", "3e92"] }
+            vendor: { op: In, value: ["8086", "5912", "3e92"] } # do we need all values?

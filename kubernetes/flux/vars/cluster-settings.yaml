@@ -14,3 +14,4 @@ data:
   NFS_ADDR: "10.43.0.20"
   NFS_DIR: "/exports"
   STORAGE_HOSTNAME: "cerulean"
+  PLEX_CLAIM: "CLAIM_TEST"

@@ -1,0 +1,43 @@
+#jinja2: trim_blocks: True, lstrip_blocks: True
+{% for storageClass in csi_driver_nfs.storage_class %}
+{% for item in storageClass.nfs_pvcs %}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-csi-{{ item.name }}
+spec:
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: {{ item.reclaimPolicy }}
+  storageClassName: nfs-csi
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    - noatime
+    - rsize=131072
+    - wsize=131072
+  csi:
+    driver: nfs.csi.k8s.io
+    readOnly: false
+    volumeHandle: {{ storageClass.server }}/#
+    volumeAttributes:
+      server: {{ storageClass.server }}
+      share: {{ item.path }}
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ item.name }}
+  namespace: default
+spec:
+  accessModes: ["ReadWriteMany"]
+  storageClassName: {{ storageClass.name }}
+  resources:
+    requests:
+      storage: 1Mi # Size does not matter
+{% endfor %}
+{% endfor %}

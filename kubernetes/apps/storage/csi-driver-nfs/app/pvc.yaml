@@ -1,0 +1,76 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-csi-media
+spec:
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-csi
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    - noatime
+    - rsize=131072
+    - wsize=131072
+  csi:
+    driver: nfs.csi.k8s.io
+    readOnly: false
+    volumeHandle: nfs-server.default.svc.cluster.local/#
+    volumeAttributes:
+      server: nfs-server.default.svc.cluster.local
+      share: /media
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media
+  namespace: default
+spec:
+  accessModes: ["ReadWriteMany"]
+  storageClassName: nfs-csi
+  resources:
+    requests:
+      storage: 1Mi # Size does not matter
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-csi-downloads
+spec:
+  capacity:
+    storage: 1Mi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-csi
+  mountOptions:
+    - nfsvers=4.1
+    - hard
+    - noatime
+    - rsize=131072
+    - wsize=131072
+  csi:
+    driver: nfs.csi.k8s.io
+    readOnly: false
+    volumeHandle: nfs-server.default.svc.cluster.local/#
+    volumeAttributes:
+      server: nfs-server.default.svc.cluster.local
+      share: /downloads
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: downloads
+  namespace: default
+spec:
+  accessModes: ["ReadWriteMany"]
+  storageClassName: nfs-csi
+  resources:
+    requests:
+      storage: 1Mi # Size does not matter

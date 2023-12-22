@@ -29,7 +29,7 @@ spec:
     keepHistory: false
   dependsOn:
     - name: csi-driver-nfs
-      namespace: kube-system
+      namespace: storage
   values:
     image:
       repository: docker.io/itsthenetwork/nfs-server-alpine
