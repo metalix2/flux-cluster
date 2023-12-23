@@ -5,7 +5,7 @@ metadata:
   name: nfs-csi
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: nfs-server.default.svc.cluster.local
+  server: nfs-server.networking.svc.cluster.local
   share: /exports
 reclaimPolicy: Delete
 volumeBindingMode: Immediate

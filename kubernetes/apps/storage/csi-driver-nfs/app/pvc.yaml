@@ -19,9 +19,9 @@ spec:
   csi:
     driver: nfs.csi.k8s.io
     readOnly: false
-    volumeHandle: nfs-server.default.svc.cluster.local/#
+    volumeHandle: nfs-server.networking.svc.cluster.local/#media
     volumeAttributes:
-      server: nfs-server.default.svc.cluster.local
+      server: nfs-server.networking.svc.cluster.local
       share: /media
 
 ---
@@ -57,9 +57,9 @@ spec:
   csi:
     driver: nfs.csi.k8s.io
     readOnly: false
-    volumeHandle: nfs-server.default.svc.cluster.local/#
+    volumeHandle: nfs-server.networking.svc.cluster.local/#downloads
     volumeAttributes:
-      server: nfs-server.default.svc.cluster.local
+      server: nfs-server.networking.svc.cluster.local
       share: /downloads
 
 ---

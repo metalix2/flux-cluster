@@ -22,7 +22,7 @@ spec:
   csi:
     driver: nfs.csi.k8s.io
     readOnly: false
-    volumeHandle: {{ storageClass.server }}/#
+    volumeHandle: {{ storageClass.server }}/#{{ item.name }}
     volumeAttributes:
       server: {{ storageClass.server }}
       share: {{ item.path }}
