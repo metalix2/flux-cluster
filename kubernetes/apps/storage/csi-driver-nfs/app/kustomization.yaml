@@ -4,5 +4,4 @@ kind: Kustomization
 namespace: storage
 resources:
   - ./helmrelease.yaml
-  - ./pvc.yaml
   - ./storageclass.yaml
