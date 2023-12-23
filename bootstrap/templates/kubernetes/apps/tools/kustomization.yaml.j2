@@ -5,9 +5,9 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   {% if intel_device_plugin.enabled | default(false) %}
-  - ./intel_device_plugin/ks.yaml
+  - ./intel-device-plugin/ks.yaml
   {% endif %}
   {% if node_feature_discovery.enabled | default(false) %}
-  - ./node_feature_discovery/ks.yaml
+  - ./node-feature-discovery/ks.yaml
   {% endif %}
   - ./reloader/ks.yaml
