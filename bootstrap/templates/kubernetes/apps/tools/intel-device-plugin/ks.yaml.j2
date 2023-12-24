@@ -5,6 +5,8 @@ metadata:
   name: &app intel-device-plugin
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: cluster-apps-cert-manager
   targetNamespace: tools
   commonMetadata:
     labels:
