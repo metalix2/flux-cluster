@@ -21,6 +21,14 @@ spec:
     connect:
       credentialsName: onepassword-connect-secret
       credentialsKey: 1password-credentials.json
+    ingress:
+      enabled: true
+      ingressClassName: internal
+      hosts:
+        - &host "onepassword-connect.${SECRET_DOMAIN}"
+      tls:
+        - hosts:
+            - *host
     operator:
       create: false
     serviceType: ClusterIP
