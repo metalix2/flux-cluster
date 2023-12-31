@@ -1,6 +1,8 @@
 ---
 originRequest:
   http2Origin: true
+warp-routing:
+  enabled: true
 
 ingress:
   - hostname: "${SECRET_DOMAIN}"
