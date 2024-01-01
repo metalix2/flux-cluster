@@ -5,6 +5,8 @@ metadata:
   name: onepassword-connect
   namespace: flux-system
 spec:
+  dependsOn:
+    - name: external-secrets
   path: ./kubernetes/apps/security/1password/app
   prune: true
   sourceRef:
