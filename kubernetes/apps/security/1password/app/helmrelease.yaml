@@ -21,14 +21,3 @@ spec:
     connect:
       credentialsName: onepassword-connect-secret
       credentialsKey: 1password-credentials.json
-    ingress:
-      enabled: true
-      ingressClassName: internal
-      pathType: Prefix
-      hosts:
-        - host: &host "onepassword-connect.${SECRET_DOMAIN}"
-          paths:
-            - path: /
-      tls:
-        - hosts:
-            - *host
