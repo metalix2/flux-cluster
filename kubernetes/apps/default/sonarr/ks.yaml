@@ -5,8 +5,8 @@ metadata:
   name: cluster-apps-sonarr
   namespace: flux-system
 spec:
-  # dependsOn:
-  #   - name: cluster-apps-external-secrets-stores
+  dependsOn:
+    - name: onepassword-connect
   path: ./kubernetes/apps/default/sonarr/app
   prune: true
   sourceRef:
