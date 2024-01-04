@@ -1,0 +1,16 @@
+# networking.k8s.io/v1
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: pod-gateway
+  namespace: networking
+spec:
+  selector: app.kubernetes.io/name == 'pod-gateway'
+  types: ["Egress"]
+  egress:
+    - action: Allow
+      protocol: UDP
+      destination:
+        nets: ["0.0.0.0/0"]
+        ports: [51830]
