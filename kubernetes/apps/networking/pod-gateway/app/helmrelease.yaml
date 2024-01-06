@@ -42,7 +42,7 @@ spec:
         type: openvpn
         image:
           repository: docker.io/qmcgaw/gluetun
-          tag: v3.32.0
+          tag: v3.37.0
         env:
           - name: VPN_AUTH
             value: ';'
