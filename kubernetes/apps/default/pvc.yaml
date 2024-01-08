@@ -32,12 +32,10 @@ metadata:
   namespace: default
 spec:
   accessModes: ["ReadWriteMany"]
-  #volumeName: nfs-csi-media
-  storageClssName: nfs-csi
+  storageClassName: nfs-csi
   resources:
     requests:
       storage: 1Mi # Size does not matter
-
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -72,7 +70,6 @@ metadata:
   namespace: default
 spec:
   accessModes: ["ReadWriteMany"]
-  #volumeName: nfs-csi-downloads
   storageClassName: nfs-csi
   resources:
     requests:
