@@ -9,7 +9,6 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs-csi
   mountOptions:
     - nfsvers=4.1
     - hard
@@ -32,10 +31,11 @@ metadata:
   namespace: default
 spec:
   accessModes: ["ReadWriteMany"]
-  storageClassName: nfs-csi
+  volumeName: nfs-csi-media
   resources:
     requests:
       storage: 1Mi # Size does not matter
+
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -47,7 +47,6 @@ spec:
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: nfs-csi
   mountOptions:
     - nfsvers=4.1
     - hard
@@ -70,7 +69,7 @@ metadata:
   namespace: default
 spec:
   accessModes: ["ReadWriteMany"]
-  storageClassName: nfs-csi
+  volumeName: nfs-csi-downloads
   resources:
     requests:
       storage: 1Mi # Size does not matter
