@@ -110,7 +110,7 @@ spec:
         enabled: true
         existingClaim: config
         globalMounts:
-          - subPath: /sonarr
+          - subPath: sonarr/
       # pushover-notify:
       #   type: configMap
       #   name: sonarr-configmap
