@@ -7,7 +7,6 @@ metadata:
 spec:
   dependsOn:
     - name: onepassword-connect
-    - name: cluster-apps-internal-dns
   path: ./kubernetes/apps/default/plex/app
   prune: true
   sourceRef:
