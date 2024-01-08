@@ -106,9 +106,11 @@ spec:
           - hosts:
               - *host
     persistence:
-      # config:
-      #   enabled: true
-      #   existingClaim: sonarr-config
+      config:
+        enabled: true
+        existingClaim: config
+        globalMounts:
+          - subPath: /sonarr
       # pushover-notify:
       #   type: configMap
       #   name: sonarr-configmap
