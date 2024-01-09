@@ -8,6 +8,8 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/name: pod-gateway
+  policyTypes:
+    - Egress
   egress:
     - to:
         - ipBlock:
