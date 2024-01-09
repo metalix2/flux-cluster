@@ -1,91 +1,101 @@
----
-# yaml-language-server: $schema=https://kubernetes-schemas.devbu.io/helmrelease_v2beta2.json
-apiVersion: helm.toolkit.fluxcd.io/v2beta2
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: pod-gateway
-  namespace: networking
+  name: vpn-gateway
+  labels:
+    # Avoid variable substitution of shell variables bellow
+    kustomize.toolkit.fluxcd.io/substitute: disabled
 spec:
-  interval: 15m
+  interval: 5m
   chart:
     spec:
       chart: pod-gateway
-      version: 6.0.0
+      version: 6.5.1
+      interval: 15m
       sourceRef:
         kind: HelmRepository
         name: angelnu
         namespace: flux-system
-  maxHistory: 3
-  install:
-    createNamespace: true
-    remediation:
-      retries: 3
-  upgrade:
-    cleanupOnFail: true
-    remediation:
-      retries: 3
-  uninstall:
-    keepHistory: false
+  #See https://github.com/angelnu/helm-charts/blob/main/charts/apps/pod-gatewa/values.yaml
   values:
-    controller:
-      annotations:
-        reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/angelnu/pod-gateway
-      tag: v1.8.1
-    DNS: 172.16.1.1
+      # I am using dev version for testing - others should be using latest
+      tag: 1.10.0@sha256:d728eac85f750b37c96a0dafd038561ea4b8035857802be1128ea9b19c61e181
+    webhook:
+      image:
+        repository: ghcr.io/angelnu/gateway-admision-controller
+        # Use dev version
+        pullPolicy: Always
+        tag: 3.10.0@sha256:a8ed630613de277244dfe203cd11d05905d7eeba8d8c41e399b02ee9a847b2f5
     addons:
-      netshoot:
-        enabled: true
       vpn:
         enabled: true
-        type: openvpn
-        image:
-          repository: docker.io/qmcgaw/gluetun
-          tag: v3.32.0
+        type: gluetun
+        gluetun:
+          image:
+            repository: docker.io/qmcgaw/gluetun
+            tag: latest@sha256:1b6962746d67d33b7a0791f648c8789bec181179d50005dcc80599877cad52e3
+
         env:
-          - name: VPN_AUTH
-            value: ';'
-          - name: configFile
-            value: |-
+          - name:  VPN_SERVICE_PROVIDER
+            value: private internet access
+          - name:  SERVER_REGIONS
+            value: UK London
+          - name: SERVER_NAME
+            value: london407,london413
+          - name: VPN_PORT_FORWARDING
+            value: on
 
         envFrom:
           - secretRef:
-              name: pia-auth
-        securityContext:
-          capabilities:
-            add: ["NET_ADMIN"]
+              name: pia
+
+        livenessProbe:
+          exec:
+            command:
+              - sh
+              - -c
+              - if [ $(wget -q -O- https://ipinfo.io/city) == 'London' ]; then exit 0; else exit $?; fi
+          initialDelaySeconds: 30
+          periodSeconds: 60
+          failureThreshold: 3
 
         networkPolicy:
           enabled: true
+
           egress:
             - to:
-                - ipBlock:
-                    cidr: 0.0.0.0/0
+              - ipBlock:
+                  cidr: 0.0.0.0/0
               ports:
-                - port: 51830
-                  protocol: UDP
+              # VPN traffic
+              - port: &vpn_port 501
+                protocol: UDP
             - to:
-                - namespaceSelector: {}
-    publicPorts:
-      - IP: 10
-        hostname: qbittorrent-0
-        ports:
-          - port: 56202
-            type: udp
-          - port: 56202
-            type: tcp
-    routed_namespaces: ["downloads"]
+              - ipBlock:
+                  cidr: 10.42.0.0/15
+
+    routed_namespaces:
+      - vpn
+    
     settings:
-      DNS_LOCAL_CIDRS: local
-      NOT_ROUTED_TO_GATEWAY_CIDRS: "10.42.0.0/15"
-      VPN_BLOCK_OTHER_TRAFFIC: false
+      # -- If using a VPN, interface name created by it
       VPN_INTERFACE: tun0
-      VPN_LOCAL_CIDRS: "10.42.0.0/15 192.168.1.0/24"
-      VPN_TRAFFIC_PORT: 501
-      VXLAN_IP_NETWORK: "172.16.0"
-    webhook:
-      gatewayDefault: false
-      image:
-        repository: ghcr.io/angelnu/gateway-admision-controller
-        tag: v3.7.0
+      # -- Prevent non VPN traffic to leave the gateway
+      VPN_BLOCK_OTHER_TRAFFIC: true
+      # -- If VPN_BLOCK_OTHER_TRAFFIC is true, allow VPN traffic over this port
+      VPN_TRAFFIC_PORT: *vpn_port
+      # -- Traffic to these IPs will be send through the K8S gateway
+      VPN_LOCAL_CIDRS: "10.42.0.0/15 192.168.0.0/23"
+    
+    # -- settings to expose ports, usually through a VPN provider.
+    # NOTE: if you change it you will need to manually restart the gateway POD
+    publicPorts:
+      - hostname: qbittorrent
+        IP: 10
+        ports:
+        - type: udp
+          port: 52421
+        - type: tcp
+          port: 52421
