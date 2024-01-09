@@ -8,15 +8,13 @@ spec:
   podSelector:
     matchLabels:
       app.kubernetes.io/name: pod-gateway
-  policyTypes:
-    - Egress
   egress:
     - to:
-      - ipBlock:
-          cidr: 0.0.0.0/0
+        - ipBlock:
+            cidr: 0.0.0.0/0
       ports:
-      - port: 501
-        protocol: UDP
+        - port: 501
+          protocol: UDP
     - to:
-      - ipBlock:
-          cidr: 10.42.0.0/15    
+        - ipBlock:
+            cidr: 10.42.0.0/15    
