@@ -12,8 +12,8 @@ spec:
     - Egress
   egress:
     - to:
-      - ipBlock:
-        cidr: "0.0.0.0/0"
+        - ipBlock:
+          cidr: "0.0.0.0/0"
       ports:
         - protocol: UDP
           port: 52421
