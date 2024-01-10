@@ -1,0 +1,36 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: media
+  namespace: vpn
+spec:
+  accessModes: ["ReadWriteMany"]
+  volumeName: pv-nfs-media
+  resources:
+    requests:
+      storage: 1Mi # Size does not matter
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: downloads
+  namespace: vpn
+spec:
+  accessModes: ["ReadWriteMany"]
+  volumeName: pv-nfs-downloads
+  resources:
+    requests:
+      storage: 1Mi # Size does not matter
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config
+  namespace: vpn
+spec:
+  accessModes: ["ReadWriteMany"]
+  volumeName: pv-nfs-config
+  resources:
+    requests:
+      storage: 1Mi # Size does not matter
