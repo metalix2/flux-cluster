@@ -70,8 +70,8 @@ spec:
                   cidr: 0.0.0.0/0
               ports:
               # VPN traffic
-              - port: &vpn_port 501
-                protocol: TCP
+              - port: &vpn_port 1197
+                protocol: UDP
             - to:
               - ipBlock:
                   cidr: 10.42.0.0/15
