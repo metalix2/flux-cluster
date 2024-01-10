@@ -31,7 +31,7 @@ metadata:
   namespace: vpn
 spec:
   accessModes: ["ReadWriteMany"]
-  volumeName: pv-nfs-media
+  volumeName: pv-vpn-media
   resources:
     requests:
       storage: 1Mi # Size does not matter
@@ -68,7 +68,7 @@ metadata:
   namespace: vpn
 spec:
   accessModes: ["ReadWriteMany"]
-  volumeName: pv-nfs-downloads
+  volumeName: pv-vpn-downloads
   resources:
     requests:
       storage: 1Mi # Size does not matter
@@ -105,7 +105,7 @@ metadata:
   namespace: vpn
 spec:
   accessModes: ["ReadWriteMany"]
-  volumeName: pv-nfs-config
+  volumeName: pv-vpn-config
   resources:
     requests:
       storage: 1Mi # Size does not matter
