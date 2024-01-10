@@ -2,14 +2,17 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: pod-gateway
-  namespace: networking
+  name: vpn-policy
+  namespace: vpn
 spec:
-  podSelector:
-    matchLabels:
-      app.kubernetes.io/name: pod-gateway
+  podSelector: {}
   policyTypes:
+    - Ingress
     - Egress
+  ingress:
+    - to:
+        - ipBlock:
+          cidr: 10.42.0.0/15
   egress:
     - to:
         - ipBlock:
