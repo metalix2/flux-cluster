@@ -41,9 +41,9 @@ spec:
           - name:  VPN_SERVICE_PROVIDER
             value: private internet access
           - name:  SERVER_REGIONS
-            value: UK London
+            value: Netherlands
           - name: SERVER_NAME
-            value: london407,london413
+            value: amsterdam429
           - name: VPN_PORT_FORWARDING
             value: on
 
@@ -56,7 +56,7 @@ spec:
             command:
               - sh
               - -c
-              - if [ $(wget -q -O- https://ipinfo.io/city) == 'London' ]; then exit 0; else exit $?; fi
+              - if [ $(wget -q -O- https://ipinfo.io/country) == 'Netherlands' ]; then exit 0; else exit $?; fi
           initialDelaySeconds: 30
           periodSeconds: 60
           failureThreshold: 3
@@ -71,7 +71,7 @@ spec:
               ports:
               # VPN traffic
               - port: &vpn_port 501
-                protocol: UDP
+                protocol: TCP
             - to:
               - ipBlock:
                   cidr: 10.42.0.0/15
