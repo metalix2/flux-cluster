@@ -83,9 +83,9 @@ spec:
       # -- If using a VPN, interface name created by it
       # VPN_INTERFACE: vxlan0
       # -- Prevent non VPN traffic to leave the gateway
-      VPN_BLOCK_OTHER_TRAFFIC: true
+      # VPN_BLOCK_OTHER_TRAFFIC: true
       # -- If VPN_BLOCK_OTHER_TRAFFIC is true, allow VPN traffic over this port
-      VPN_TRAFFIC_PORT: *vpn_port
+      # VPN_TRAFFIC_PORT: *vpn_port
       # -- Traffic to these IPs will be send through the K8S gateway
       VPN_LOCAL_CIDRS: "10.42.0.0/15 192.168.0.0/23"
     
