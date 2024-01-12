@@ -68,10 +68,10 @@ spec:
             - to:
               - ipBlock:
                   cidr: 0.0.0.0/0
-              ports:
-              # VPN traffic
-              - port: &vpn_port 1197
-                protocol: UDP
+              # ports:
+              # # VPN traffic
+              # - port: &vpn_port 1197
+              #   protocol: UDP
             - to:
               - ipBlock:
                   cidr: 10.42.0.0/15
@@ -81,7 +81,7 @@ spec:
     
     settings:
       # -- If using a VPN, interface name created by it
-      VPN_INTERFACE: tun0
+      # VPN_INTERFACE: vxlan0
       # -- Prevent non VPN traffic to leave the gateway
       VPN_BLOCK_OTHER_TRAFFIC: true
       # -- If VPN_BLOCK_OTHER_TRAFFIC is true, allow VPN traffic over this port
