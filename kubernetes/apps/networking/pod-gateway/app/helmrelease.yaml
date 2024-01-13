@@ -50,7 +50,9 @@ spec:
         envFrom:
           - secretRef:
               name: pia-secret
-
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
         livenessProbe:
           exec:
             command:
@@ -97,6 +99,10 @@ spec:
       VPN_TRAFFIC_PORT: *vpn_port
       # -- Traffic to these IPs will be send through the K8S gateway
       VPN_LOCAL_CIDRS: "10.42.0.0/15 192.168.0.0/23"
+      DNS_LOCAL_CIDRS: local
+      VPN_BLOCK_OTHER_TRAFFIC: false
+      NOT_ROUTED_TO_GATEWAY_CIDRS: "10.42.0.0/15"
+      VXLAN_IP_NETWORK: "172.16.0"
     
     # -- settings to expose ports, usually through a VPN provider.
     # NOTE: if you change it you will need to manually restart the gateway POD
