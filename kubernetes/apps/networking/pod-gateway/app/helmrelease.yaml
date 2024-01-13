@@ -100,7 +100,5 @@ spec:
       - hostname: qbittorrent
         IP: 10
         ports:
-        - type: udp
-          port: 52421
         - type: tcp
           port: 52421
