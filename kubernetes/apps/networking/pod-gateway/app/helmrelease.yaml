@@ -28,6 +28,7 @@ spec:
         # Use dev version
         pullPolicy: Always
         tag: 3.10.0@sha256:a8ed630613de277244dfe203cd11d05905d7eeba8d8c41e399b02ee9a847b2f5
+    DNS: 172.16.0.1
     addons:
       vpn:
         enabled: true
@@ -44,8 +45,6 @@ spec:
             value: Netherlands
           - name: SERVER_NAME
             value: amsterdam429
-          - name: VPN_INTERFACE
-            value: tun0
           - name: VPN_PORT_FORWARDING
             value: off
 
@@ -78,7 +77,6 @@ spec:
             # Cluster
             - to:
                 - namespaceSelector: {}
-    DNS: 172.16.1.1
     routed_namespaces:
       - vpn
     
