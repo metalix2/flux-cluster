@@ -77,23 +77,8 @@ spec:
             # Cluster
             - to:
                 - namespaceSelector: {}
-    routed_namespaces:
-      - vpn
     
-    settings:
-      # -- If using a VPN, interface name created by it
-      VPN_INTERFACE: tun0
-      # -- Prevent non VPN traffic to leave the gateway
-      # VPN_BLOCK_OTHER_TRAFFIC: true
-      # -- If VPN_BLOCK_OTHER_TRAFFIC is true, allow VPN traffic over this port
-      VPN_TRAFFIC_PORT: *vpn_port
-      # -- Traffic to these IPs will be send through the K8S gateway
-      VPN_LOCAL_CIDRS: "10.42.0.0/15 192.168.0.0/23"
-      DNS_LOCAL_CIDRS: local
-      VPN_BLOCK_OTHER_TRAFFIC: false
-      NOT_ROUTED_TO_GATEWAY_CIDRS: "10.42.0.0/15"
-      VXLAN_IP_NETWORK: "172.16.0"
-    
+
     # -- settings to expose ports, usually through a VPN provider.
     # NOTE: if you change it you will need to manually restart the gateway POD
     publicPorts:
@@ -102,3 +87,14 @@ spec:
         ports:
         - type: tcp
           port: 52421
+    routed_namespaces: ["vpn"]
+    settings:
+      VPN_INTERFACE: "tun0"
+      VPN_TRAFFIC_PORT: "1197"
+      VPN_LOCAL_CIDRS: "10.42.0.0/15 172.16.0.0/12 192.168.0.0/23"
+      DNS_LOCAL_CIDRS: "local"
+      VPN_BLOCK_OTHER_TRAFFIC: "true"
+      NOT_ROUTED_TO_GATEWAY_CIDRS: "10.42.0.0/15 172.16.0.0/12 192.168.0.0/23"
+      VXLAN_ID: "43"
+      VXLAN_IP_NETWORK: "172.16.0"
+      IPTABLES_NFT: "yes"
