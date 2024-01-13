@@ -44,6 +44,8 @@ spec:
             value: Netherlands
           - name: SERVER_NAME
             value: amsterdam429
+          - name: VPN_INTERFACE
+            value: tun0
           - name: VPN_PORT_FORWARDING
             value: off
 
@@ -73,20 +75,10 @@ spec:
               # VPN traffic
               - port: &vpn_port 1197
                 protocol: UDP
-            # DNS traffic
-            - to:
-              - ipBlock:
-                  cidr: 1.1.1.1/32
-                ports:
-                - port: 53
-                  protocol: TCP
-                - port: 53
-                  protocol: UDP
             # Cluster
             - to:
-              - ipBlock:
-                  cidr: 10.42.0.0/15
-
+                - namespaceSelector: {}
+    DNS: 172.16.1.1
     routed_namespaces:
       - vpn
     
