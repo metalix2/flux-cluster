@@ -72,7 +72,7 @@ spec:
               # VPN traffic
               - port: &vpn_port 1197
                 protocol: UDP
-               - port: &vpn_port 1197
+              - port: &vpn_port 1197
                 protocol: TCP
             # Cluster
             - to:
