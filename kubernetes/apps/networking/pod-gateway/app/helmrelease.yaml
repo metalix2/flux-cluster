@@ -70,10 +70,10 @@ spec:
                   cidr: 0.0.0.0/0
               ports:
               # VPN traffic
-              - port: &vpn_port 1197
-                protocol: UDP
-              - port: &vpn_port 1197
-                protocol: TCP
+                - port: &vpn_port 1197
+                  protocol: UDP
+                - port: &vpn_port 1197
+                  protocol: TCP
             # Cluster
             - to:
                 - ipBlock:
@@ -87,8 +87,10 @@ spec:
       - hostname: qbittorrent-0
         IP: 20
         ports:
-        - type: tcp
-          port: 52421
+          - type: tcp
+            port: 52421
+          - type: udp
+            port: 52421
     routed_namespaces: ["vpn"]
     settings:
       VPN_INTERFACE: tun0
