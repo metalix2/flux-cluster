@@ -76,9 +76,11 @@ spec:
                 protocol: UDP
             # Cluster
             - to:
-                - namespaceSelector: {}
-    
-
+                - ipBlock:
+                    cidr: 10.42.0.0/15
+            - to:
+                - ipBlock:
+                    cidr: 192.168.0.0/23
     # -- settings to expose ports, usually through a VPN provider.
     # NOTE: if you change it you will need to manually restart the gateway POD
     publicPorts:
@@ -89,12 +91,9 @@ spec:
           port: 52421
     routed_namespaces: ["vpn"]
     settings:
-      VPN_INTERFACE: "tun0"
+      VPN_INTERFACE: tun0
       VPN_TRAFFIC_PORT: "1197"
-      VPN_LOCAL_CIDRS: "10.42.0.0/15 172.16.0.0/12 192.168.0.0/23"
-      DNS_LOCAL_CIDRS: "local"
-      VPN_BLOCK_OTHER_TRAFFIC: "true"
-      NOT_ROUTED_TO_GATEWAY_CIDRS: "10.42.0.0/15 172.16.0.0/12 192.168.0.0/23"
-      VXLAN_ID: "43"
+      VPN_LOCAL_CIDRS: "172.16.0.0/24 10.42.0.0/15 192.168.0.0/23"
+      VPN_BLOCK_OTHER_TRAFFIC: true
+      NOT_ROUTED_TO_GATEWAY_CIDRS: "10.42.0.0/15 192.168.0.0/23"
       VXLAN_IP_NETWORK: "172.16.0"
-      IPTABLES_NFT: "yes"
