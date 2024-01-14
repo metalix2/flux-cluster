@@ -73,7 +73,8 @@ spec:
       downloads:
         enabled: true
         existingClaim: downloads
-  
+    podAnnotations:
+      setGateway: "true"
     podSecurityContext:
       runAsUser: 568
       runAsGroup: 568
