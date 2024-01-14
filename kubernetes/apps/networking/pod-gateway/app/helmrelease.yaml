@@ -42,7 +42,7 @@ spec:
           - name:  VPN_SERVICE_PROVIDER
             value: private internet access
           - name:  SERVER_REGIONS
-            value: Netherlands
+            value: Andorra
           - name: SERVER_NAME
             value: andorra404
           - name: VPN_PORT_FORWARDING
