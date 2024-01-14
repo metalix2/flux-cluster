@@ -41,10 +41,8 @@ spec:
         env:
           - name:  VPN_SERVICE_PROVIDER
             value: private internet access
-          - name:  SERVER_REGIONS
-            value: Andorra
-          - name: SERVER_NAME
-            value: andorra404
+          - name: SERVER_HOSTNAME
+            value: uk-manchester.privacy.network
           - name: VPN_PORT_FORWARDING
             value: off
 
@@ -74,6 +72,8 @@ spec:
               # VPN traffic
               - port: &vpn_port 1197
                 protocol: UDP
+               - port: &vpn_port 1197
+                protocol: TCP
             # Cluster
             - to:
                 - ipBlock:
@@ -85,7 +85,7 @@ spec:
     # NOTE: if you change it you will need to manually restart the gateway POD
     publicPorts:
       - hostname: qbittorrent-0
-        IP: 10
+        IP: 20
         ports:
         - type: tcp
           port: 52421
@@ -94,6 +94,6 @@ spec:
       VPN_INTERFACE: tun0
       VPN_TRAFFIC_PORT: "1197"
       VPN_LOCAL_CIDRS: "172.16.0.0/24 10.42.0.0/15 192.168.0.0/23"
-      VPN_BLOCK_OTHER_TRAFFIC: true
+      VPN_BLOCK_OTHER_TRAFFIC: false
       NOT_ROUTED_TO_GATEWAY_CIDRS: "10.42.0.0/15 192.168.0.0/23"
       VXLAN_IP_NETWORK: "172.16.0"
