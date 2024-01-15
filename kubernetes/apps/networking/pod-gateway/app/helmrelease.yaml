@@ -63,7 +63,7 @@ spec:
         #   failureThreshold: 3
 
         networkPolicy:
-          enabled: true
+          enabled: false
           egress:
             - to:
               - ipBlock:
