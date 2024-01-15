@@ -57,7 +57,7 @@ spec:
         #     command:
         #       - sh
         #       - -c
-        #       - if [ $(wget -q -O- https://ipinfo.io/city) == 'Manchester' ]; then exit 0; else exit $?; fi
+        #       - if [ $(wget -q -O- https://www.privateinternetaccess.com/site-api/get-location-info) == 'Manchester' ]; then exit 0; else exit $?; fi
         #   initialDelaySeconds: 30
         #   periodSeconds: 60
         #   failureThreshold: 3
@@ -77,10 +77,10 @@ spec:
             # Cluster
             - to:
                 - ipBlock:
-                    cidr: 10.42.0.0/15
+                    cidr: 10.42.0.0/16
             - to:
                 - ipBlock:
-                    cidr: 192.168.0.0/23
+                    cidr: 10.43.0.0/16
     # -- settings to expose ports, usually through a VPN provider.
     # NOTE: if you change it you will need to manually restart the gateway POD
     publicPorts:
@@ -95,7 +95,7 @@ spec:
     settings:
       VPN_INTERFACE: tun0
       VPN_TRAFFIC_PORT: "1197"
-      VPN_LOCAL_CIDRS: "172.16.0.0/24 10.42.0.0/15 192.168.0.0/23"
+      VPN_LOCAL_CIDRS: "172.16.0.0/24 10.42.0.0/16 10.43.0.0/16"
       VPN_BLOCK_OTHER_TRAFFIC: false
-      NOT_ROUTED_TO_GATEWAY_CIDRS: "172.16.0.0/24 10.42.0.0/15 192.168.0.0/23"
+      NOT_ROUTED_TO_GATEWAY_CIDRS: "10.42.0.0/16 10.43.0.0/16"
       VXLAN_IP_NETWORK: "172.16.0"
