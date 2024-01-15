@@ -63,7 +63,11 @@ spec:
         #   failureThreshold: 3
 
         networkPolicy:
-          enabled: false
+          enabled: true
+          ingress:
+              - to:
+                - ipBlock:
+                  cidr: 10.42.0.0/15
           egress:
             - to:
               - ipBlock:
