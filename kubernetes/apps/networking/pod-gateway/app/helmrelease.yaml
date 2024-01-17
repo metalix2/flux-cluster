@@ -23,10 +23,12 @@ spec:
       # I am using dev version for testing - others should be using latest
       tag: 1.10.0@sha256:d728eac85f750b37c96a0dafd038561ea4b8035857802be1128ea9b19c61e181
     service:
+      # Configure a service for the main application
       main:
+        type: ClusterIP
         ports:
           http:
-            port: 8080
+            port: 4789
             protocol: UDP
     webhook:
       image:
