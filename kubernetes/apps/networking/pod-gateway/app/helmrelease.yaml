@@ -62,39 +62,39 @@ spec:
         #   periodSeconds: 60
         #   failureThreshold: 3
 
-        networkPolicy:
-          enabled: true
-          ingress:
-              - to:
-                - ipBlock:
-                  cidr: 10.42.0.0/15
-          egress:
-            - to:
-              - ipBlock:
-                  cidr: 0.0.0.0/0
-              ports:
-              # VPN traffic
-                - port: &vpn_port 1197
-                  protocol: UDP
-                - port: &vpn_port 1197
-                  protocol: TCP
-            # Cluster
-            - to:
-                - ipBlock:
-                    cidr: 10.42.0.0/16
-            - to:
-                - ipBlock:
-                    cidr: 10.43.0.0/16
+        # networkPolicy:
+        #   enabled: true
+        #   ingress:
+        #       - to:
+        #         - ipBlock:
+        #           cidr: 10.42.0.0/15
+        #   egress:
+        #     - to:
+        #       - ipBlock:
+        #           cidr: 0.0.0.0/0
+        #       ports:
+        #       # VPN traffic
+        #         - port: &vpn_port 1197
+        #           protocol: UDP
+        #         - port: &vpn_port 1197
+        #           protocol: TCP
+        #     # Cluster
+        #     - to:
+        #         - ipBlock:
+        #             cidr: 10.42.0.0/16
+        #     - to:
+        #         - ipBlock:
+        #             cidr: 10.43.0.0/16
     # -- settings to expose ports, usually through a VPN provider.
     # NOTE: if you change it you will need to manually restart the gateway POD
-    publicPorts:
-      - hostname: qbittorrent-0
-        IP: 20
-        ports:
-          - type: tcp
-            port: 52421
-          - type: udp
-            port: 52421
+    # publicPorts:
+    #   - hostname: qbittorrent-0
+    #     IP: 20
+    #     ports:
+    #       - type: tcp
+    #         port: 52421
+    #       - type: udp
+    #         port: 52421
     routed_namespaces: ["vpn"]
     settings:
       VPN_INTERFACE: tun0
