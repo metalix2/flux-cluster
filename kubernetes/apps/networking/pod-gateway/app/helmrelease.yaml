@@ -23,9 +23,15 @@ spec:
       # I am using dev version for testing - others should be using latest
       tag: 1.10.0@sha256:d728eac85f750b37c96a0dafd038561ea4b8035857802be1128ea9b19c61e181
     service:
-      main:
+      pod-gateway:
         enabled: true
         type: ClusterIP
+        ports:
+          pod-gateway:
+            enabled: true
+            port: 4789
+            protocol: UDP
+            targetPort: 4789
     webhook:
       image:
         repository: ghcr.io/angelnu/gateway-admision-controller
