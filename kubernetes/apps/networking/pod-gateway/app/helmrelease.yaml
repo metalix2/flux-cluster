@@ -17,12 +17,12 @@ spec:
   values:
     image:
       repository: ghcr.io/angelnu/pod-gateway
-      tag: 1.10.0@sha256:d728eac85f750b37c96a0dafd038561ea4b8035857802be1128ea9b19c61e181
+      tag: v1.9.0
     webhook:
       image:
         repository: ghcr.io/angelnu/gateway-admision-controller
         pullPolicy: Always
-        tag: 3.10.0@sha256:a8ed630613de277244dfe203cd11d05905d7eeba8d8c41e399b02ee9a847b2f5
+        tag: v3.7.0
     DNS: 172.16.0.1
     addons:
       vpn:
