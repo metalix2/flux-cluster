@@ -20,12 +20,12 @@ spec:
   values:
     image:
       repository: ghcr.io/angelnu/pod-gateway
-      # I am using dev version for testing - others should be using latest
       tag: 1.10.0@sha256:d728eac85f750b37c96a0dafd038561ea4b8035857802be1128ea9b19c61e181
     service:
       # Configure a service for the main application
       main:
-        type: ClusterIP
+        enabled: true
+        clusterIP: "10.43.0.15"
         ports:
           http:
             port: 4789
@@ -33,7 +33,6 @@ spec:
     webhook:
       image:
         repository: ghcr.io/angelnu/gateway-admision-controller
-        # Use dev version
         pullPolicy: Always
         tag: 3.10.0@sha256:a8ed630613de277244dfe203cd11d05905d7eeba8d8c41e399b02ee9a847b2f5
     DNS: 172.16.0.1
@@ -45,7 +44,6 @@ spec:
           image:
             repository: docker.io/qmcgaw/gluetun
             tag: latest@sha256:fc0b03da1a10fedb8fbfed6ebb34960234e4bfe764b6f301cae6aa8291bccde0
-
         env:
           - name:  VPN_SERVICE_PROVIDER
             value: private internet access
@@ -53,7 +51,6 @@ spec:
             value: uk-manchester.privacy.network
           - name: VPN_PORT_FORWARDING
             value: off
-
         envFrom:
           - secretRef:
               name: pia-secret
@@ -97,7 +94,7 @@ spec:
     # NOTE: if you change it you will need to manually restart the gateway POD
     # publicPorts:
     #   - hostname: qbittorrent-0
-    #     IP: 20
+    #     IP: 10
     #     ports:
     #       - type: tcp
     #         port: 52421
