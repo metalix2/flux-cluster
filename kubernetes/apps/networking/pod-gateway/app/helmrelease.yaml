@@ -2,9 +2,6 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: pod-gateway
-  labels:
-    # Avoid variable substitution of shell variables bellow
-    kustomize.toolkit.fluxcd.io/substitute: disabled
 spec:
   interval: 5m
   chart:
@@ -21,15 +18,6 @@ spec:
     image:
       repository: ghcr.io/angelnu/pod-gateway
       tag: 1.10.0@sha256:d728eac85f750b37c96a0dafd038561ea4b8035857802be1128ea9b19c61e181
-    service:
-      # Configure a service for the main application
-      main:
-        enabled: true
-        clusterIP: "10.43.0.15"
-        ports:
-          http:
-            port: 4789
-            protocol: UDP
     webhook:
       image:
         repository: ghcr.io/angelnu/gateway-admision-controller
