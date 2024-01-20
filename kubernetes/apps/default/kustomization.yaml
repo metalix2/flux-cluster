@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./pvc.yaml
-  # - ./plex/ks.yaml
+  - ./plex/ks.yaml
   - ./sonarr/ks.yaml
-  # - ./hajimari/ks.yaml
+  - ./hajimari/ks.yaml
+  - ./qbittorrent/ks.yaml
