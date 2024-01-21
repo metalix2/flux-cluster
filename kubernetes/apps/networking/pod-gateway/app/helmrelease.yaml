@@ -42,9 +42,6 @@ spec:
         envFrom:
           - secretRef:
               name: pia-secret
-        securityContext:
-          capabilities:
-            add: ["NET_ADMIN"]
         # livenessProbe:
         #   exec:
         #     command:
