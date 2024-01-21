@@ -9,4 +9,3 @@ resources:
   - ./k8s-gateway/ks.yaml
   - ./nfs-server/ks.yaml
   - ./nginx/ks.yaml
-  # - ./pod-gateway/ks.yaml

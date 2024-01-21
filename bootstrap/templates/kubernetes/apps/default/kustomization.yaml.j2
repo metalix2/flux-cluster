@@ -13,6 +13,9 @@ resources:
   {% if sonarr.enabled | default(false) %}
   - ./sonarr/ks.yaml
   {% endif %}
+  {% if qbittorrent.enabled | default(false) %}
+  - ./qbittorrent/ks.yaml
+  {% endif %}
   {% if hajimari.enabled | default(false) %}
   - ./hajimari/ks.yaml
   {% endif %}
