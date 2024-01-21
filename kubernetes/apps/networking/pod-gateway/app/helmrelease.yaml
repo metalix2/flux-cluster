@@ -54,6 +54,10 @@ spec:
 
         networkPolicy:
           enabled: true
+          ingress:
+            - to:
+                - ipBlock:
+                    cidr: 0.0.0.0/0
           egress:
             - to:
                 - ipBlock:
