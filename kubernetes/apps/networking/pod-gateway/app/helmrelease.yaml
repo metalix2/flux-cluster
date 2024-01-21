@@ -55,26 +55,24 @@ spec:
         #   periodSeconds: 60
         #   failureThreshold: 3
 
-        # networkPolicy:
-        #   enabled: true
-        #   egress:
-        #     - to:
-        #         - ipBlock:
-        #             cidr: 0.0.0.0/0
-        #       ports:
-        #         - port: 51820
-        #           protocol: UDP
-        #         - port: 51820
-        #           protocol: TCP
-        #         - port: 53
-        #           protocol: UDP
-        #     - to:
-        #         # Allow traffic within K8S - change if your K8S cluster uses a different CIDR
-        #         - ipBlock:
-        #             cidr: "10.0.0.0/8"
-        #         - ipBlock:
-        #             cidr: "10.0.0.0/8"
-        #         - namespaceSelector: {}
+        networkPolicy:
+          enabled: true
+          egress:
+            - to:
+                - ipBlock:
+                    cidr: 0.0.0.0/0
+              ports:
+                - port: 51820
+                  protocol: UDP
+                - port: 51820
+                  protocol: TCP
+                - port: 53
+                  protocol: UDP
+            - to:
+                # Allow traffic within K8S - change if your K8S cluster uses a different CIDR
+                - ipBlock:
+                    cidr: "10.0.0.0/8"
+                - namespaceSelector: {}
     # -- settings to expose ports, usually through a VPN provider.
     # NOTE: if you change it you will need to manually restart the gateway POD
     # publicPorts:
