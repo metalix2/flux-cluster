@@ -83,14 +83,14 @@ spec:
                 - namespaceSelector: {}
     # -- settings to expose ports, usually through a VPN provider.
     # NOTE: if you change it you will need to manually restart the gateway POD
-    # publicPorts:
-    #   - hostname: qbittorrent-0
-    #     IP: 10
-    #     ports:
-    #       - type: tcp
-    #         port: 52421
-    #       - type: udp
-    #         port: 52421
+    publicPorts:
+      - hostname: qbittorrent-0
+        IP: 10
+        ports:
+          - type: tcp
+            port: 21902
+          - type: udp
+            port: 21902
     routed_namespaces: ["vpn"]
     settings:
       VPN_INTERFACE: "tun0"
