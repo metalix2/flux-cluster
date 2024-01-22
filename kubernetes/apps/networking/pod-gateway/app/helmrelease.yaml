@@ -34,14 +34,17 @@ spec:
             tag: latest@sha256:c2cffe57da4012ab30b4bdfc4da9c60183c86c35baad551d58778b40a3dc0b04
         env:
           - name: VPN_SERVICE_PROVIDER
-            value: private internet access
-          - name: SERVER_REGIONS
-            value: Netherlands
-          - name: PRIVATE_INTERNET_ACCESS_OPENVPN_ENCRYPTION_PRESET
-            value: none
+            value: "private internet access"
+          - name: VPN_TYPE
+            value: wireguard
+          - name: VPN_INTERFACE
+            value: wg0
         envFrom:
           - secretRef:
               name: pia-secret
+        securityContext:
+          capabilities:
+            add: ["NET_ADMIN"]
         # livenessProbe:
         #   exec:
         #     command:
