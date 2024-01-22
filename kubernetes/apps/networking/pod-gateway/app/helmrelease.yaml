@@ -68,6 +68,8 @@ spec:
                   protocol: UDP
                 - port: 53
                   protocol: UDP
+                - port: 53
+                  protocol: TCP
             - to:
                 # Allow traffic within K8S - change if your K8S cluster uses a different CIDR
                 - ipBlock:
