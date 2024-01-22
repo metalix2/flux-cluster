@@ -38,7 +38,7 @@ spec:
           - name: SERVER_REGIONS
             value: Netherlands
           - name: PRIVATE_INTERNET_ACCESS_OPENVPN_ENCRYPTION_PRESET
-            value: normal
+            value: none
         envFrom:
           - secretRef:
               name: pia-secret
