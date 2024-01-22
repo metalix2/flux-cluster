@@ -36,9 +36,11 @@ spec:
           - name: VPN_SERVICE_PROVIDER
             value: "private internet access"
           - name: VPN_TYPE
-            value: wireguard
+            value: openvpn
           - name: VPN_INTERFACE
-            value: wg0
+            value: tun0
+          - name: LOG_LEVEL
+            value: debug
         envFrom:
           - secretRef:
               name: pia-secret
